@@ -1,0 +1,25 @@
+---
+name: Helm-lint-CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: 
+      image: ixxel/unit-tests-alpine:latest
+    steps:
+    - name: Git clone repo
+      uses: actions/checkout@v2
+    - name: Helm chart linting
+      uses: ixxeL-actions/helm-lint@main
+      with:
+        chart-name: 'argocd'
+        app-version: 'v3.0.0'
+        version: 'v1.0.0'
+        destination: '.'
+        working-dir: './chart/argo-cd'
