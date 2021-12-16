@@ -1,5 +1,5 @@
 ---
-name: Helm-lint-CI
+name: Helm-package-CI
 on:
   push:
     branches:
@@ -15,8 +15,8 @@ jobs:
     steps:
     - name: Git clone repo
       uses: actions/checkout@v2
-    - name: Helm chart linting
-      uses: ixxeL-actions/helm-lint@main
+    - name: Helm chart packaging
+      uses: ixxeL-actions/helm-package@main
       with:
         chart-name: 'argocd'
         app-version: 'v3.0.0'
