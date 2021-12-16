@@ -55,7 +55,7 @@ runs:
           echo ::set-output name=CHART_VERSION::${{ inputs.version }} 
           echo ::set-output name=CHART_APP_VERSION::${{ inputs.app-version }}
           echo -e "${CYAN}[ INFO ] > Package created --> ${PKG_OUTPUT}${BLANK}"
-          ls -la
+          ls -la --color
           echo -e "${GREEN}[ CHECK SUCCESS ] > Helm packaging succeeded without any error.${BLANK}"
         else
           echo -e "${PURPLE}[ CHECK ERROR ] > Helm packaging didn't succeed !${BLANK}"
