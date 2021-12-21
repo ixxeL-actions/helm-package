@@ -40,7 +40,7 @@ runs:
           exit 1
         fi
 
-        echo -e "${CYAN}[ INFO ] > The helm chart ${{ inputs.chart-name }} will be packaged as version ${{ inputs.version }} and appVersion ${{ inputs.app-version }} on directory target ${{ inputs.destination }}${BLANK}"
+        echo -e "${CYAN}[ INFO ] > The helm chart ${YELLOW}${{ inputs.chart-name }}${CYAN} will be packaged as version ${YELLOW}${{ inputs.version }}${CYAN} and appVersion ${YELLOW}${{ inputs.app-version }}${CYAN} on directory target ${YELLOW}${{ inputs.destination }}${CYAN}${BLANK}"
         yq e -i '.version ="${{ inputs.version }}"' ${{ inputs.working-dir }}/Chart.yaml
         yq e -i '.appVersion ="${{ inputs.app-version }}"' ${{ inputs.working-dir }}/Chart.yaml
         yq e -i '.name ="${{ inputs.chart-name }}"' ${{ inputs.working-dir }}/Chart.yaml
@@ -48,10 +48,10 @@ runs:
         PKG_OUTPUT=$(helm package ${{ inputs.working-dir }} --destination=${{ inputs.destination }} \
                                                --version=${{ inputs.version }} \
                                                --app-version=${{ inputs.app-version }})
-        PKG_NAME=$(echo "${PKG_OUTPUT}" | awk -F '/' '{print $NF}')
 
         if [[ $? = 0 ]]
         then
+          PKG_NAME=$(echo "${PKG_OUTPUT}" | awk -F '/' '{print $NF}')
           echo ::set-output name=CHART_NAME::${{ inputs.chart-name }}
           echo ::set-output name=CHART_VERSION::${{ inputs.version }} 
           echo ::set-output name=CHART_APP_VERSION::${{ inputs.app-version }}
